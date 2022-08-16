@@ -17,6 +17,9 @@ import { FileInputModule } from '../common/modules/file-input/file-input.module'
 // services
 import { FormsService } from './services/forms.service';
 
+// guards
+import { StepGuard } from './guards/step.guard';
+
 // components
 import { ClientFormComponent } from './client-form.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
@@ -44,6 +47,7 @@ import { ClientIdentityComponent } from './components/client-identity/client-ide
   ],
   providers: [
     FormsService,
+    StepGuard,
   ],
 })
 export class ClientFormModule {

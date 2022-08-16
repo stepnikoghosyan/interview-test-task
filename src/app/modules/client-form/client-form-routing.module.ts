@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// guards
+import { StepGuard } from './guards/step.guard';
+
 // enums
 import { AppRoutes } from '../../models/enums/app-routes.model';
 
@@ -18,14 +21,23 @@ const routes: Routes = [
       {
         path: AppRoutes.ClientInfo,
         component: ClientInfoComponent,
+        canActivate: [
+          StepGuard,
+        ]
       },
       {
         path: AppRoutes.ClientAddress,
         component: ClientAddressComponent,
+        canActivate: [
+          StepGuard,
+        ]
       },
       {
         path: AppRoutes.ClientIdentity,
         component: ClientIdentityComponent,
+        canActivate: [
+          StepGuard,
+        ]
       },
       {
         path: '**',
