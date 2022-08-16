@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+// services
+import { NotificationsService } from '../../common/modules/notifications/services/notifications.service';
+
 // models
 import { AppRoutes } from '../../../models/enums/app-routes.model';
 import { FormSteps } from '../models/form-steps.model';
 import { DocumentType } from '../models/enums/document-type.model';
+import { NotificationTypes } from '../../common/modules/notifications/models/notification-types.model';
+
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
+
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';
 import { onlyNumbersValidator } from '../../common/validators/only-numbers.validator';
@@ -21,9 +28,12 @@ export class FormsService {
 
   private currentStep: FormSteps = AppRoutes.ClientInfo;
 
+  public isProfilePage = false;
+
   private readonly stepsToFormMapping: { [key in FormSteps]: FormGroup };
 
   constructor(
+    private readonly notificationsService: NotificationsService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
   ) {
@@ -189,6 +199,22 @@ export class FormsService {
 
   private goToProfilePage(): void {
     this.currentStep = AppRoutes.ClientInfo;
+    this.isProfilePage = true;
+
+    this.notificationsService.showNotification({
+      title: 'Success',
+      message: 'Profile Created',
+      type: NotificationTypes.SUCCESS,
+    });
+
     this.router.navigate([getFullRoute(AppRoutes.CreatedClient)]);
+  }
+
+  public startOver(): void {
+    this.clientInfoForm.reset();
+    this.clientAddressForm.reset();
+    this.clientIdentityForm.reset();
+    this.isProfilePage = false;
+    this.router.navigate([getFullRoute(AppRoutes.ClientInfo)]);
   }
 }

@@ -25,6 +25,7 @@ import { ClientFormComponent } from './client-form.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { ClientAddressComponent } from './components/client-address/client-address.component';
 import { ClientIdentityComponent } from './components/client-identity/client-identity.component';
+import { CreatedClientComponent } from './components/created-client/created-client.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ClientIdentityComponent } from './components/client-identity/client-ide
     ClientInfoComponent,
     ClientAddressComponent,
     ClientIdentityComponent,
+    CreatedClientComponent,
   ],
   imports: [
     CommonModule,

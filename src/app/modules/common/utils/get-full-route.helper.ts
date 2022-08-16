@@ -5,6 +5,7 @@ export function getFullRoute(route: AppRoutes): string {
     [AppRoutes.ClientInfo]: `${AppRoutes.ClientForm}/${AppRoutes.ClientInfo}`,
     [AppRoutes.ClientAddress]: `${AppRoutes.ClientForm}/${AppRoutes.ClientAddress}`,
     [AppRoutes.ClientIdentity]: `${AppRoutes.ClientForm}/${AppRoutes.ClientIdentity}`,
+    [AppRoutes.CreatedClient]: `${AppRoutes.ClientForm}/${AppRoutes.CreatedClient}`,
   };
 
   return `/${config[route] || route}`;
