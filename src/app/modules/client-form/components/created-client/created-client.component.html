@@ -19,6 +19,7 @@
       </ul>
     </div>
 
+    <!-- Tabs -->
     <div class="row justify-content-center mt-5">
       <div class="col-12">
         <div *ngIf="activeTab.value === PROFILE_TABS.BasicInfo" class="tab-content">
@@ -53,7 +54,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.gender || '-' }}</p>
+                <p>{{ genderDisplayValues[userData.basicInfo.gender] || '-' }}</p>
               </div>
             </div>
 
@@ -64,7 +65,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.clientGroup.join(',') }}</p>
+                <p>{{ clientGroupValuePrepare(userData.basicInfo.clientGroup) }}</p>
               </div>
             </div>
 
@@ -175,7 +176,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.identity.documentType }}</p>
+                <p>{{ documentTypeDisplayValues[userData.identity.documentType] }}</p>
               </div>
             </div>
 

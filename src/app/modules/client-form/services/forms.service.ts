@@ -48,10 +48,6 @@ export class FormsService {
       [AppRoutes.ClientIdentity]: this.clientIdentityForm,
     };
 
-    (window as any).form1 = this.clientInfoForm;
-    (window as any).form2 = this.clientAddressForm;
-    (window as any).form3 = this.clientIdentityForm;
-
     // In case you want to test fast
     // this.clientInfoForm.patchValue({
     //   lastName: 'Nikoghosyan',
