@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+// models
+import { AppRoutes } from '../../../models/enums/app-routes.model';
+import { FormSteps } from '../models/form-steps.model';
+
+// helpers
+import { getFullRoute } from '../../common/utils/get-full-route.helper';
 
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';
@@ -11,12 +19,23 @@ export class FormsService {
   public clientAddressForm: FormGroup;
   public clientIdentityForm: FormGroup;
 
+  private currentStep: FormSteps = AppRoutes.ClientInfo;
+
+  private readonly stepsToFormMapping: { [key in FormSteps]: FormGroup };
+
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly router: Router,
   ) {
     this.clientInfoForm = this.initAndGetClientInfoForm();
     this.clientAddressForm = this.initAndGetClientAddressForm();
     this.clientIdentityForm = this.initAndGetClientIdentityForm();
+
+    this.stepsToFormMapping = {
+      [AppRoutes.ClientInfo]: this.clientInfoForm,
+      [AppRoutes.ClientAddress]: this.clientAddressForm,
+      [AppRoutes.ClientIdentity]: this.clientIdentityForm,
+    };
 
     (window as any).form1 = this.clientInfoForm;
     (window as any).form2 = this.clientAddressForm;
@@ -43,5 +62,57 @@ export class FormsService {
 
   private initAndGetClientIdentityForm(): FormGroup {
     return this.formBuilder.group({});
+  }
+
+  public goToPrevStep(): void {
+    if (this.currentStep === AppRoutes.ClientInfo) {
+      return;
+    }
+
+    let prevStep: FormSteps | null = null;
+    switch (this.currentStep) {
+      case AppRoutes.ClientAddress:
+        prevStep = AppRoutes.ClientInfo;
+        break;
+      case AppRoutes.ClientIdentity:
+        prevStep = AppRoutes.ClientAddress;
+        break;
+    }
+
+    if (!prevStep) {
+      return;
+    }
+
+    this.currentStep = prevStep;
+    this.router.navigate([getFullRoute(prevStep)]);
+  }
+
+  public goToNextStep(): void {
+    let nextStep: FormSteps | null = null;
+    switch (this.currentStep) {
+      case AppRoutes.ClientInfo:
+        nextStep = AppRoutes.ClientAddress;
+        break;
+      case AppRoutes.ClientAddress:
+        nextStep = AppRoutes.ClientIdentity;
+        break;
+    }
+
+    if (!nextStep) {
+      return;
+    }
+
+    const form = this.stepsToFormMapping[this.currentStep];
+    if (!form) {
+      return;
+    }
+
+    form.markAllAsTouched();
+    if (form.invalid) {
+      return;
+    }
+
+    this.currentStep = nextStep;
+    this.router.navigate([getFullRoute(nextStep)]);
   }
 }
