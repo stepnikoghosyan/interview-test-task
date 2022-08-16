@@ -1,5 +1,7 @@
-import { NotificationTypes } from '@shared/modules/notifications/models/notification-types.model';
 import { IndividualConfig } from 'ngx-toastr';
+
+// models
+import { NotificationTypes } from './notification-types.model';
 
 export interface INotificationConfig {
   type: NotificationTypes;
