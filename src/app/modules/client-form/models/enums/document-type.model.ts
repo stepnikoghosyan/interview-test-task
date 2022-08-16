@@ -1,34 +1,43 @@
-import { ILabelValue } from '../../../common/models/label-value.model';
+import { DisplayValues } from '../../../common/models/display-values.model';
 
 export enum DocumentType {
   Passport = 'Passport',
   Birth = 'Birth ',
   Certificate = 'Certificate',
   Driving = 'Driving',
-  license = 'license',
+  License = 'License',
 }
 
-export function getDocumentTypeDisplayValues(): Array<ILabelValue<DocumentType>> {
-  return [
-    {
-      label: 'Passport',
-      value: DocumentType.Passport,
+export function getDocumentTypeDisplayValues(): DisplayValues<DocumentType> {
+  return {
+    mapping: {
+      [DocumentType.Passport]: 'DocumentType',
+      [DocumentType.Birth]: 'DocumentType',
+      [DocumentType.Certificate]: 'DocumentType',
+      [DocumentType.Driving]: 'DocumentType',
+      [DocumentType.License]: 'DocumentType',
     },
-    {
-      label: 'Birth',
-      value: DocumentType.Birth,
-    },
-    {
-      label: 'Certificate',
-      value: DocumentType.Certificate,
-    },
-    {
-      label: 'Driving',
-      value: DocumentType.Driving,
-    },
-    {
-      label: 'license',
-      value: DocumentType.license,
-    },
-  ];
+    values: [
+      {
+        label: 'Passport',
+        value: DocumentType.Passport,
+      },
+      {
+        label: 'Birth',
+        value: DocumentType.Birth,
+      },
+      {
+        label: 'Certificate',
+        value: DocumentType.Certificate,
+      },
+      {
+        label: 'Driving',
+        value: DocumentType.Driving,
+      },
+      {
+        label: 'license',
+        value: DocumentType.License,
+      },
+    ],
+  };
 }

@@ -51,10 +51,11 @@ export class FormsService {
     (window as any).form2 = this.clientAddressForm;
     (window as any).form3 = this.clientIdentityForm;
 
+    // In case you want to test fast
     // this.clientInfoForm.patchValue({
-    //   lastName: 'Dsa',
-    //   name: 'Asd',
-    //   middleName: 'Ddd',
+    //   lastName: 'Nikoghosyan',
+    //   name: 'Stepan',
+    //   middleName: 'Styop',
     //   dateOfBirth: new Date(),
     //   phoneNumber: '123456789',
     //   gender: Gender.Male,
@@ -70,6 +71,15 @@ export class FormsService {
     //   city: 1,
     //   street: 'asd',
     //   house: 'dsa',
+    // });
+    //
+    // this.clientIdentityForm.patchValue({
+    //   documentType: DocumentType.Passport,
+    //   series: 'some series 123j',
+    //   number: '19208142',
+    //   issuedBy: '543',
+    //   dateOfIssue: new Date(),
+    //   file: null,
     // });
   }
 
@@ -208,6 +218,14 @@ export class FormsService {
     });
 
     this.router.navigate([getFullRoute(AppRoutes.CreatedClient)]);
+  }
+
+  public get formValues(): IUserData {
+    return {
+      basicInfo: this.clientInfoForm.value,
+      address: this.clientAddressForm.value,
+      identity: this.clientIdentityForm.value,
+    };
   }
 
   public startOver(): void {

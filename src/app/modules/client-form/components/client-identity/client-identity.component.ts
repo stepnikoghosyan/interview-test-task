@@ -14,7 +14,7 @@ import { getDocumentTypeDisplayValues } from '../../models/enums/document-type.m
 export class ClientIdentityComponent {
   public form: FormGroup;
 
-  public readonly documentTypeList = getDocumentTypeDisplayValues();
+  public readonly documentTypeList = getDocumentTypeDisplayValues().values;
 
   constructor(private readonly formsService: FormsService) {
     this.form = formsService.clientIdentityForm;

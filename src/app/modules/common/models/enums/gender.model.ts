@@ -1,4 +1,4 @@
-import { ILabelValue } from '../label-value.model';
+import { DisplayValues } from '../display-values.model';
 
 export enum Gender {
   Male = 'Male',
@@ -6,19 +6,26 @@ export enum Gender {
   Other = 'Other',
 }
 
-export function getGenderDisplayValues(): Array<ILabelValue<Gender>> {
-  return [
-    {
-      label: 'Male',
-      value: Gender.Male,
+export function getGenderDisplayValues(): DisplayValues<Gender> {
+  return {
+    mapping: {
+      [Gender.Male]: 'Male',
+      [Gender.Female]: 'Female',
+      [Gender.Other]: 'Other',
     },
-    {
-      label: 'Female',
-      value: Gender.Female,
-    },
-    {
-      label: 'Other',
-      value: Gender.Other,
-    }
-  ];
+    values: [
+      {
+        label: 'Male',
+        value: Gender.Male,
+      },
+      {
+        label: 'Female',
+        value: Gender.Female,
+      },
+      {
+        label: 'Other',
+        value: Gender.Other,
+      }
+    ]
+  };
 }

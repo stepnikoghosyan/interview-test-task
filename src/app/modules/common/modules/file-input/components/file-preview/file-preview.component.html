@@ -1,0 +1,14 @@
+<div *ngIf="imageSrc" class="d-flex justify-content-center justify-content-md-start align-items-center">
+  <div class="preview-image-container">
+    <img
+      appFileOrStringToImgSrc
+      [imageSource]="imageSrc"
+      src="" alt="Image Preview"
+    />
+  </div>
+
+  <button (click)="handleClearFileInput()" type="button"
+          class="btn btn-danger btn-sm ms-3 ml-4">
+    <fa-icon icon="ban" size="2x"></fa-icon>
+  </button>
+</div>

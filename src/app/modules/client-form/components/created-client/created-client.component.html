@@ -1,1 +1,242 @@
-<p>created-client works!</p>
+<div class="container emp-profile">
+  <section>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">
+          {{ userData.basicInfo.name }} ({{ userData.basicInfo.middleName }}) {{ userData.basicInfo.lastName  }}
+        </h2>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li *ngFor="let item of tabsConfig" class="nav-item">
+          <button (click)="handleTabClick(item)" [ngClass]="{ active: activeTab.value === item.value }"
+                  class="btn-outline-primary tab-btn nav-link" data-toggle="tab" role="tab" aria-controls="home">
+            {{ item.label }}
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-12">
+        <div *ngIf="activeTab.value === PROFILE_TABS.BasicInfo" class="tab-content">
+          <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+
+            <!-- Date Of Birth -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Date Of Birth</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.dateOfBirth }}</p>
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Phone Number</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.phoneNumber }}</p>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Gender</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.gender || '-' }}</p>
+              </div>
+            </div>
+
+            <!-- Client Group -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Client Group</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.clientGroup.join(',') }}</p>
+              </div>
+            </div>
+
+            <!-- Coordinator -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Coordinator</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.coordinator }}</p>
+              </div>
+            </div>
+
+            <!-- Do not send SMS -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Do not send SMS</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.basicInfo.doNotSendSMS && 'Enabled' || 'Disabled' }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="activeTab.value === PROFILE_TABS.Address" class="tab-content">
+          <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+
+            <!-- Index -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Index</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.index || '-' }}</p>
+              </div>
+            </div>
+
+            <!-- Country -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Country</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.country }}</p>
+              </div>
+            </div>
+
+            <!-- Area -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Area</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.area || '-' }}</p>
+              </div>
+            </div>
+
+            <!-- City -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">City</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.city }}</p>
+              </div>
+            </div>
+
+            <!-- Street -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Street</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.street }}</p>
+              </div>
+            </div>
+
+            <!-- House -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">House</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.address.house }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="activeTab.value === PROFILE_TABS.Identity" class="tab-content">
+          <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+
+            <!-- Document Type -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Document Type</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.identity.documentType }}</p>
+              </div>
+            </div>
+
+            <!-- Series -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Series</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.identity.series || '-' }}</p>
+              </div>
+            </div>
+
+            <!-- Number -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Number</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.identity.number }}</p>
+              </div>
+            </div>
+
+            <!-- Issued By -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Issued By</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.identity.issuedBy || '-' }}</p>
+              </div>
+            </div>
+
+            <!-- Date of Issue -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">Date of Issue</label>
+              </div>
+
+              <div class="col-md-6">
+                <p>{{ userData.identity.dateOfIssue }}</p>
+              </div>
+            </div>
+
+            <!-- File -->
+            <div class="row">
+              <div class="col-md-6">
+                <label class="label">File</label>
+              </div>
+
+              <div class="col-md-6">
+                <app-file-preview [imageSrc]="userData.identity.file"></app-file-preview>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

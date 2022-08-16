@@ -19,8 +19,8 @@ import { getClientGroupDisplayValues } from '../../models/enums/client-group.mod
 export class ClientInfoComponent {
   public form: FormGroup;
 
-  public readonly genderList = getGenderDisplayValues();
-  public readonly clientGroupList = getClientGroupDisplayValues();
+  public readonly genderList = getGenderDisplayValues().values;
+  public readonly clientGroupList = getClientGroupDisplayValues().values;
 
   // TODO: get data from service
   public coordinatorsList?: ILabelValue<any>[] = [

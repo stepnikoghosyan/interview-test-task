@@ -1,4 +1,4 @@
-import { ILabelValue } from '../../../common/models/label-value.model';
+import { DisplayValues } from '../../../common/models/display-values.model';
 
 export enum ClientGroup {
   VIP = 'VIP',
@@ -6,19 +6,26 @@ export enum ClientGroup {
   New = 'New',
 }
 
-export function getClientGroupDisplayValues(): Array<ILabelValue<ClientGroup>> {
-  return [
-    {
-      label: 'VIP Clients',
-      value: ClientGroup.VIP,
+export function getClientGroupDisplayValues(): DisplayValues<ClientGroup> {
+  return {
+    mapping: {
+      [ClientGroup.VIP]: 'VIP Clients',
+      [ClientGroup.Loyal]: 'Loyal Clients',
+      [ClientGroup.New]: 'New Clients',
     },
-    {
-      label: 'Loyal Clients',
-      value: ClientGroup.Loyal,
-    },
-    {
-      label: 'New Clients',
-      value: ClientGroup.New,
-    },
-  ];
+    values: [
+      {
+        label: 'VIP Clients',
+        value: ClientGroup.VIP,
+      },
+      {
+        label: 'Loyal Clients',
+        value: ClientGroup.Loyal,
+      },
+      {
+        label: 'New Clients',
+        value: ClientGroup.New,
+      },
+    ],
+  };
 }

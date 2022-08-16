@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCalendar, faSearch, faBan } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,6 +23,13 @@ import { NotificationsModule } from './modules/common/modules/notifications/noti
     AppRoutingModule,
     NgbModule,
     NotificationsModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      autoDismiss: true,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
+      tapToDismiss: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

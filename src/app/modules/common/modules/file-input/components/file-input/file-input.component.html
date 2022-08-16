@@ -1,0 +1,15 @@
+<div class="input-group mb-3">
+  <div class="custom-file">
+    <input (change)="onFileChange($event)"
+           accept="image/*"
+           class="custom-file-input"
+           type="file"
+           id="file-input">
+
+    <label class="custom-file-label" for="file-input">
+      {{ value ? 'Update File' : 'Choose file' }}
+    </label>
+  </div>
+</div>
+
+<app-file-preview *ngIf="previewImage" (clearFileInput)="clearFileInput()"></app-file-preview>

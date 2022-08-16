@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // components
-import { FileInputComponent } from './components/file-input.component';
+import { FileInputComponent } from './components/file-input/file-input.component';
+import { FilePreviewComponent } from './components/file-preview/file-preview.component';
 
 // directives
 import { FileOrStringToImgSrcDirective } from './directives/file-or-string-to-img-src.directive';
@@ -11,6 +12,7 @@ import { FileOrStringToImgSrcDirective } from './directives/file-or-string-to-im
 @NgModule({
   declarations: [
     FileInputComponent,
+    FilePreviewComponent,
     FileOrStringToImgSrcDirective,
   ],
   imports: [
@@ -18,7 +20,8 @@ import { FileOrStringToImgSrcDirective } from './directives/file-or-string-to-im
     FontAwesomeModule,
   ],
   exports: [
-    FileInputComponent
+    FileInputComponent,
+    FilePreviewComponent,
   ],
 })
 export class FileInputModule {
