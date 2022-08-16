@@ -4,6 +4,9 @@ import { FormGroup } from '@angular/forms';
 // services
 import { FormsService } from '../../services/forms.service';
 
+// models
+import { ILabelValue } from '../../../common/models/label-value.model';
+
 // configs
 import { getGenderDisplayValues } from '../../../common/models/enums/gender.model';
 import { getClientGroupDisplayValues } from '../../models/enums/client-group.model';
@@ -20,7 +23,7 @@ export class ClientInfoComponent {
   public readonly clientGroupList = getClientGroupDisplayValues();
 
   // TODO: get data from service
-  public coordinatorsList = [
+  public coordinatorsList?: ILabelValue<any>[] = [
     {
       label: 'Hopar 1',
       value: 1,

@@ -57,7 +57,8 @@
   <app-form-field labelFor="coordinator" label="Coordinator">
     <app-single-select
       formControlName="coordinator"
-      [items]="coordinatorsList"
+      [items]="coordinatorsList || []"
+      [isLoading]="!coordinatorsList"
       labelKey="label"
       valueKey="value"
       placeholder="Select Coordinator">

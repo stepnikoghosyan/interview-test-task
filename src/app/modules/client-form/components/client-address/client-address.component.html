@@ -1,1 +1,51 @@
-<p>client-address works!</p>
+<div class="d-flex">
+  <div class="w-100">
+    <h3 class="mb-4 text-center">Client Address</h3>
+  </div>
+</div>
+
+<form [formGroup]="form">
+  <!-- Index -->
+  <app-form-field labelFor="index" label="Index">
+    <input id="index" formControlName="index" appOnlyNumbers type="text" class="form-control">
+  </app-form-field>
+
+  <!-- Country -->
+  <app-form-field labelFor="country" label="Country">
+    <app-single-select
+      formControlName="country"
+      [items]="countriesList || []"
+      [isLoading]="!countriesList"
+      labelKey="label"
+      valueKey="value"
+      placeholder="Select Country">
+    </app-single-select>
+  </app-form-field>
+
+  <!-- Area -->
+  <app-form-field labelFor="area" label="Area">
+    <input id="area" formControlName="area" type="text" class="form-control">
+  </app-form-field>
+
+  <!-- City -->
+  <app-form-field labelFor="city" label="City">
+    <app-single-select
+      formControlName="city"
+      [items]="citiesList || []"
+      [isLoading]="!citiesList"
+      labelKey="label"
+      valueKey="value"
+      placeholder="Select City">
+    </app-single-select>
+  </app-form-field>
+
+  <!-- Street -->
+  <app-form-field labelFor="street" label="Street">
+    <input id="street" formControlName="street" type="text" class="form-control">
+  </app-form-field>
+
+  <!-- House -->
+  <app-form-field labelFor="house" label="House">
+    <input id="house" formControlName="house" type="text" class="form-control">
+  </app-form-field>
+</form>

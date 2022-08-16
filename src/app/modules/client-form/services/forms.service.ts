@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 // models
 import { AppRoutes } from '../../../models/enums/app-routes.model';
 import { FormSteps } from '../models/form-steps.model';
-
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
-
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';
 import { onlyNumbersValidator } from '../../common/validators/only-numbers.validator';
@@ -57,15 +54,30 @@ export class FormsService {
   }
 
   private initAndGetClientAddressForm(): FormGroup {
-    return this.formBuilder.group({});
+    return this.formBuilder.group({
+      index: ['', onlyNumbersValidator],
+      country: ['', Validators.required],
+      area: [''],
+      city: ['', [Validators.required]],
+      street: [''],
+      house: [''],
+    });
   }
 
   private initAndGetClientIdentityForm(): FormGroup {
     return this.formBuilder.group({});
   }
 
+  public get isFirstStep(): boolean {
+    return this.currentStep === AppRoutes.ClientInfo;
+  }
+
+  public get isLastStep(): boolean {
+    return this.currentStep === AppRoutes.ClientIdentity;
+  }
+
   public goToPrevStep(): void {
-    if (this.currentStep === AppRoutes.ClientInfo) {
+    if (this.isFirstStep) {
       return;
     }
 
@@ -88,6 +100,10 @@ export class FormsService {
   }
 
   public goToNextStep(): void {
+    if (this.isLastStep) {
+      this.goToProfilePage();
+    }
+
     let nextStep: FormSteps | null = null;
     switch (this.currentStep) {
       case AppRoutes.ClientInfo:
@@ -114,5 +130,8 @@ export class FormsService {
 
     this.currentStep = nextStep;
     this.router.navigate([getFullRoute(nextStep)]);
+  }
+
+  private goToProfilePage(): void {
   }
 }

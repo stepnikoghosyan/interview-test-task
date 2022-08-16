@@ -5,10 +5,15 @@
 
   <div class="row justify-content-around px-4 px-md-5">
     <div class="col-12 col-md-6 col-lg-3">
-      <button (click)="handlePrevClick()" type="button" class="btn btn-outline-primary w-100">Prev</button>
+      <button *ngIf="!isFirstStep" (click)="handlePrevClick()" type="button" class="btn btn-outline-primary w-100">
+        Prev
+      </button>
     </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <button (click)="handleNextClick()" type="button" class="btn btn-outline-primary w-100">Next</button>
+
+    <div class="col-12 col-md-6 col-lg-3 align-self-end">
+      <button (click)="handleNextClick()" type="button" class="btn btn-outline-primary w-100">
+        {{ isLastStep ? 'View Profile' : 'Next' }}
+      </button>
     </div>
   </div>
 </section>

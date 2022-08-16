@@ -17,4 +17,12 @@ export class ClientFormComponent {
   public handleNextClick(): void {
     this.formsService.goToNextStep();
   }
+
+  public get isFirstStep(): boolean {
+    return this.formsService.isFirstStep;
+  }
+
+  public get isLastStep(): boolean {
+    return this.formsService.isLastStep;
+  }
 }
