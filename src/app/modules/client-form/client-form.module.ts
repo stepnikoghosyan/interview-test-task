@@ -11,6 +11,9 @@ import { CustomSelectModule } from '../common/modules/custom-select/custom-selec
 import { CustomDatePickerModule } from '../common/modules/date-select/custom-date-picker.module';
 import { OnlyNumbersInputModule } from '../common/modules/only-numbers-input/only-numbers-input.module';
 
+// modules
+import { FileInputModule } from '../common/modules/file-input/file-input.module';
+
 // services
 import { FormsService } from './services/forms.service';
 
@@ -25,7 +28,7 @@ import { ClientIdentityComponent } from './components/client-identity/client-ide
     ClientFormComponent,
     ClientInfoComponent,
     ClientAddressComponent,
-    ClientIdentityComponent
+    ClientIdentityComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import { ClientIdentityComponent } from './components/client-identity/client-ide
     CustomSelectModule,
     CustomDatePickerModule,
     OnlyNumbersInputModule,
+    FileInputModule,
   ],
   providers: [
     FormsService,

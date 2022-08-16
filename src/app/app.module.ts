@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCalendar, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faSearch, faBan } from '@fortawesome/free-solid-svg-icons';
 // modules
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,6 +24,6 @@ import { AppComponent } from './app.component';
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faSearch, faCalendar);
+    library.addIcons(faSearch, faCalendar, faBan);
   }
 }

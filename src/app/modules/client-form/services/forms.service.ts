@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 // models
 import { AppRoutes } from '../../../models/enums/app-routes.model';
 import { FormSteps } from '../models/form-steps.model';
+import { DocumentType } from '../models/enums/document-type.model';
+import { Gender } from '../../common/models/enums/gender.model';
+import { ClientGroup } from '../models/enums/client-group.model';
+
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
+
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';
 import { onlyNumbersValidator } from '../../common/validators/only-numbers.validator';
+import { imageMimeTypeValidator } from '../../common/validators/image-mime-type.validator';
+import { fileSizeValidator } from '../../common/validators/file-size.validator';
 
 @Injectable()
 export class FormsService {
@@ -37,6 +45,27 @@ export class FormsService {
     (window as any).form1 = this.clientInfoForm;
     (window as any).form2 = this.clientAddressForm;
     (window as any).form3 = this.clientIdentityForm;
+
+    this.clientInfoForm.patchValue({
+      lastName: 'Dsa',
+      name: 'Asd',
+      middleName: 'Ddd',
+      dateOfBirth: new Date(),
+      phoneNumber: '123456789',
+      gender: Gender.Male,
+      clientGroup: [ClientGroup.New],
+      coordinator: 1,
+      doNotSendSMS: false,
+    });
+
+    this.clientAddressForm.patchValue({
+      index: '123456789',
+      country: 1,
+      area: 'dsa',
+      city: 1,
+      street: 'asd',
+      house: 'dsa',
+    });
   }
 
   private initAndGetClientInfoForm(): FormGroup {
@@ -65,7 +94,14 @@ export class FormsService {
   }
 
   private initAndGetClientIdentityForm(): FormGroup {
-    return this.formBuilder.group({});
+    return this.formBuilder.group({
+      documentType: [DocumentType.Passport, [Validators.required]],
+      series: [''],
+      number: ['', [Validators.required, onlyNumbersValidator]],
+      issuedBy: [''],
+      dateOfIssue: ['', Validators.required],
+      file: [null, [imageMimeTypeValidator(['jpg', 'jpeg', 'png']), fileSizeValidator]],
+    });
   }
 
   public get isFirstStep(): boolean {
