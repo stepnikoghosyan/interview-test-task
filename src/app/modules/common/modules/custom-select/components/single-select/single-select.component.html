@@ -1,0 +1,46 @@
+<ng-select
+  [items]="items"
+  [ngModel]="value"
+  [bindLabel]="labelKey"
+  [bindValue]="!useModelBindingInsteadOfIdAndValue && valueKey || ''"
+  [placeholder]="placeholder"
+  [searchable]="false"
+  [clearable]="isClearable"
+  [multiple]="false"
+  [closeOnSelect]="true"
+  [loading]="_isLoading"
+  [searchFn]="searchFn"
+  [trackByFn]="trackByFn"
+  [notFoundText]="notFoundText"
+  [virtualScroll]="true"
+  (ngModelChange)="writeValue($event)"
+  appendTo="body">
+
+  <!-- Single select label -->
+  <ng-template ng-label-tmp let-item="item">
+    <ng-container *ngIf="_isLoading || !items.length">
+      <span class="ng-value-label">{{ placeholder }}</span>
+    </ng-container>
+    <ng-container *ngIf="!_isLoading">
+      <span>{{ item[labelKey] }}</span>
+    </ng-container>
+  </ng-template>
+
+  <!-- Header -->
+  <ng-template *ngIf="hasSelectAndDeselectAllButtons || hasSearch" ng-header-tmp>
+    <!-- Search input -->
+    <div *ngIf="hasSearch" class="search-wrap">
+      <fa-icon icon="search"></fa-icon>
+      <input type="text" [placeholder]="searchPlaceholder" (input)="handleSearchInput($event)"/>
+    </div>
+  </ng-template>
+
+  <!-- Options -->
+  <ng-template ng-option-tmp let-item="item">
+    <!-- Ordinary options -->
+    <div class="flex align-center">
+      <span>{{ item[labelKey] }}</span>
+    </div>
+  </ng-template>
+
+</ng-select>

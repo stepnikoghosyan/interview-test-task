@@ -1,0 +1,8 @@
+<div class="input-group">
+  <input ngbDatepicker #datePicker="ngbDatepicker" [value]="displayValue" (dateSelect)="handleDateSelect($event)" class="form-control"
+         placeholder="mm-dd-yyyy" name="dateOfBirth">
+
+  <button class="btn btn-outline-secondary" (click)="datePicker.toggle()" type="button">
+    <fa-icon icon="calendar"></fa-icon>
+  </button>
+</div>

@@ -1,0 +1,45 @@
+.checkbox-custom-container {
+  position: relative;
+  z-index: 0;
+
+  .with-checkbox {
+    display: inline-block;
+    padding-left: 30px;
+  }
+
+  .checkbox-custom {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+
+    fa-icon {
+      display: none;
+    }
+
+    input {
+      display: none;
+    }
+
+    input:checked + fa-icon {
+      display: block;
+    }
+  }
+}
+
+.search-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 0;
+    outline: none;
+  }
+}

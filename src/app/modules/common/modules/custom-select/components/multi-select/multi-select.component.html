@@ -1,0 +1,71 @@
+<div class="select-wrap">
+  <ng-select
+    #customSelect
+    [items]="items"
+    [ngModel]="value"
+    [bindLabel]="labelKey"
+    [bindValue]="!useModelBindingInsteadOfIdAndValue && valueKey || ''"
+    [placeholder]="placeholder"
+    [searchable]="false"
+    [clearable]="isClearable"
+    [multiple]="true"
+    [closeOnSelect]="false"
+    [loading]="_isLoading"
+    [searchFn]="searchFn"
+    [trackByFn]="trackByFn"
+    [notFoundText]="notFoundText"
+    [virtualScroll]="true"
+    (ngModelChange)="writeValue($event)"
+    appendTo="body">x
+
+    <!-- Multi select label -->
+    <ng-template *ngIf="!showDefaultTemplateForMultiSelect" ng-multi-label-tmp>
+      <ng-container *ngIf="_isLoading">
+        <span class="ng-value-label">{{ placeholder }}</span>
+      </ng-container>
+      <ng-container *ngIf="!_isLoading && customSelect.selectedItems.length">
+        <span class="ng-value-label">{{ customSelect.selectedItems.length }} of {{ customSelect.items.length }}
+          selected</span>
+      </ng-container>
+    </ng-template>
+
+
+    <!-- Header -->
+    <ng-template *ngIf="hasSelectAndDeselectAllButtons || hasSearch" ng-header-tmp>
+      <!-- Select/Unselect all buttons -->
+      <div *ngIf="hasSelectAndDeselectAllButtons"
+           class="flex justify-space-evenly align-center toggle-select-all-btn-container">
+        <button (click)="selectAll()" class="btn btn-primary">
+          <i class="fa fa-check"></i>
+          Select All
+        </button>
+        <button (click)="deselectAll()" class="btn btn-primary">
+          <i class="fa fa-close"></i>
+          Deselect All
+        </button>
+      </div>
+
+      <!-- Search input -->
+      <div *ngIf="hasSearch" class="search-wrap">
+        <fa-icon icon="search"></fa-icon>
+        <input type="text" [placeholder]="searchPlaceholder" (input)="handleSearchInput($event)"/>
+      </div>
+    </ng-template>
+
+    <!-- Options -->
+    <ng-template ng-option-tmp let-item="item">
+      <div class="custom-control custom-checkbox">
+        <input
+          [id]="item[valueKey]"
+          [checked]="isItemSelected(item, customSelect.selectedItems)"
+          type="checkbox" class="custom-control-input"
+        />
+
+        <label [for]="item[valueKey]" class="custom-control-label" style="pointer-events: none">
+          {{ item[labelKey] }}
+        </label>
+      </div>
+    </ng-template>
+
+  </ng-select>
+</div>

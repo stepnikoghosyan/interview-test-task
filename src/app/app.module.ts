@@ -1,9 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faCalendar, faSearch } from '@fortawesome/free-solid-svg-icons';
+// modules
+import { AppRoutingModule } from './app-routing.module';
+
+// components
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -12,9 +17,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faSearch, faCalendar);
+  }
+}
