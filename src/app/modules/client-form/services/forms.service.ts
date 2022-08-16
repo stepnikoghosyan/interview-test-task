@@ -5,10 +5,8 @@ import { Router } from '@angular/router';
 import { AppRoutes } from '../../../models/enums/app-routes.model';
 import { FormSteps } from '../models/form-steps.model';
 import { DocumentType } from '../models/enums/document-type.model';
-
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
-
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';
 import { onlyNumbersValidator } from '../../common/validators/only-numbers.validator';
@@ -38,8 +36,6 @@ export class FormsService {
       [AppRoutes.ClientAddress]: this.clientAddressForm,
       [AppRoutes.ClientIdentity]: this.clientIdentityForm,
     };
-
-    console.log(router.routerState.snapshot.url);
 
     (window as any).form1 = this.clientInfoForm;
     (window as any).form2 = this.clientAddressForm;
@@ -135,33 +131,19 @@ export class FormsService {
   }
 
   public goToNextStep(): void {
-    const nextStep = this.getNextStep();
-    if (!nextStep) {
+    const form = this.stepsToFormMapping[this.currentStep];
+    if (!form) {
+      return;
+    }
+
+    form.markAllAsTouched();
+    if (form.invalid) {
       return;
     }
 
     if (this.isLastStep) {
       this.goToProfilePage();
       return;
-    }
-
-    this.currentStep = nextStep as FormSteps;
-    this.router.navigate([getFullRoute(nextStep)]);
-  }
-
-  public getNextStep(): FormSteps | AppRoutes.CreatedClient | null {
-    const form = this.stepsToFormMapping[this.currentStep];
-    if (!form) {
-      return null;
-    }
-
-    form.markAllAsTouched();
-    if (form.invalid) {
-      return null;
-    }
-
-    if (this.isLastStep) {
-      return AppRoutes.CreatedClient;
     }
 
     let nextStep: FormSteps | AppRoutes.CreatedClient | null = null;
@@ -174,7 +156,35 @@ export class FormsService {
         break;
     }
 
-    return nextStep || null;
+    if (!nextStep) {
+      return;
+    }
+
+    this.currentStep = nextStep as FormSteps;
+    this.router.navigate([getFullRoute(nextStep)]);
+  }
+
+  public allowNavigationTo(step: FormSteps | AppRoutes.CreatedClient): boolean {
+    if (step === AppRoutes.ClientInfo) {
+      return true;
+    }
+
+    let previousStepForm: FormGroup;
+
+    switch (step) {
+      case AppRoutes.ClientAddress:
+        previousStepForm = this.clientInfoForm;
+        break;
+      case AppRoutes.ClientIdentity:
+        previousStepForm = this.clientAddressForm;
+        break;
+      case AppRoutes.CreatedClient:
+        previousStepForm = this.clientIdentityForm;
+        break;
+    }
+
+    previousStepForm.markAllAsTouched();
+    return previousStepForm.valid;
   }
 
   private goToProfilePage(): void {

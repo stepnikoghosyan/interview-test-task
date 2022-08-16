@@ -2,12 +2,19 @@ import { Component } from '@angular/core';
 
 // services
 import { FormsService } from './services/forms.service';
+import { NotificationsService } from '../common/modules/notifications/services/notifications.service';
+
+// models
+import { NotificationTypes } from '../common/modules/notifications/models/notification-types.model';
 
 @Component({
   templateUrl: './client-form.component.html',
 })
 export class ClientFormComponent {
-  constructor(private readonly formsService: FormsService) {
+  constructor(
+    private readonly formsService: FormsService,
+    private readonly notificationsService: NotificationsService,
+  ) {
   }
 
   public handlePrevClick(): void {
@@ -15,6 +22,14 @@ export class ClientFormComponent {
   }
 
   public handleNextClick(): void {
+    if (this.isLastStep) {
+      this.notificationsService.showNotification({
+        title: 'Success',
+        message: 'Profile Created',
+        type: NotificationTypes.SUCCESS,
+      });
+    }
+
     this.formsService.goToNextStep();
   }
 

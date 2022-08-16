@@ -6,6 +6,7 @@ import { FormsService } from '../services/forms.service';
 
 // models
 import { AppRoutes } from '../../../models/enums/app-routes.model';
+import { FormSteps } from '../models/form-steps.model';
 
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
@@ -19,12 +20,9 @@ export class StepGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const requestedStep = route.url[route.url.length - 1].path;
-    if (requestedStep === AppRoutes.ClientInfo) {
-      return true;
-    }
+    const requestedStep = route.url[route.url.length - 1].path as FormSteps | AppRoutes.CreatedClient;
 
-    const allowNavigation = !!this.formsService.getNextStep();
+    const allowNavigation = this.formsService.allowNavigationTo(requestedStep);
 
     if (!allowNavigation) {
       this.router.navigate([getFullRoute(AppRoutes.ClientInfo)]);
