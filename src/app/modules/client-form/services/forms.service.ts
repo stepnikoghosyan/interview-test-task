@@ -10,6 +10,7 @@ import { AppRoutes } from '../../../models/enums/app-routes.model';
 import { FormSteps } from '../models/form-steps.model';
 import { DocumentType } from '../models/enums/document-type.model';
 import { NotificationTypes } from '../../common/modules/notifications/models/notification-types.model';
+import { IUserData } from '../models/user-data.model';
 
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
