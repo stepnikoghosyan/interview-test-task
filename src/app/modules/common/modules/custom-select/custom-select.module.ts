@@ -7,11 +7,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SingleSelectComponent } from './components/single-select/single-select.component';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DynamicSelectDirective } from './directives/dynamic-select.directive';
 
 @NgModule({
   declarations: [
     SingleSelectComponent,
     MultiSelectComponent,
+    DynamicSelectDirective,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   exports: [
     SingleSelectComponent,
     MultiSelectComponent,
+    DynamicSelectDirective,
   ],
 })
 export class CustomSelectModule {

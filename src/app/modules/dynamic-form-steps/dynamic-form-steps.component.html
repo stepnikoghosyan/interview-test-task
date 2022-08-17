@@ -1,17 +1,17 @@
 <section class="container pb-4">
   <div class="p-4 p-md-5">
 
-    <ng-container *ngIf="!!currentStepForm && !!currentStepConfig">
+    <ng-container *ngIf="!!currentStepData">
 
       <div class="d-flex">
         <div class="w-100">
-          <h3 class="mb-4 text-center">{{ currentStepConfig.pageTitle }}</h3>
+          <h3 class="mb-4 text-center">{{ currentStepData.config.pageTitle }}</h3>
         </div>
       </div>
 
       <form [formGroup]="form">
-        <ng-container *ngFor="let control of currentStepConfig.controls">
-          <ng-container [ngSwitch]="control.controlType" [formGroupName]="currentStepConfig.route">
+        <ng-container *ngFor="let control of currentStepData.config.controls">
+          <ng-container [ngSwitch]="control.controlType" [formGroupName]="currentStepData.config.route">
 
             <!-- Text Input -->
             <app-form-field *ngSwitchCase="CONTROL_TYPES.Text" [labelFor]="control.name" [label]="control.label">
@@ -29,10 +29,12 @@
                      class="form-control">
             </app-form-field>
 
+            <!-- TODO: get rid of $any in multiple places -->
             <!-- Select -->
             <app-form-field *ngSwitchCase="CONTROL_TYPES.Select" [labelFor]="control.name" [label]="control.label">
               <app-single-select
                 *ngIf="!$any(control)['isMultiSelect']; else multiSelect"
+                appDynamicSelect [control]="$any(control)"
                 [formControlName]="control.name"
                 [items]="$any(control)['items'] || []"
                 [isLoading]="!$any(control)['items']"
@@ -44,6 +46,7 @@
 
               <ng-template #multiSelect>
                 <app-multi-select
+                  appDynamicSelect [control]="$any(control)"
                   [formControlName]="control.name"
                   [items]="$any(control)['items'] || []"
                   [isLoading]="!$any(control)['items']"

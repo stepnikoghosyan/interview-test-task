@@ -20,17 +20,17 @@ export class SelectControl<ItemType> implements IControlBase<SelectedValueSingle
   constructor(
     name: string,
     label: string,
-    items: ILabelValue<ItemType>[] = [],
+    items?: ILabelValue<ItemType>[],
     isMultiSelect: boolean = false,
     hasDynamicData: boolean = false,
     validators: ValidatorFn | ValidatorFn[] | null = [],
-    defaultValue: SelectedValueSingle | SelectedValueMulti = null,
+    defaultValue?: SelectedValueSingle | SelectedValueMulti,
   ) {
     this.name = name;
     this.label = label;
     this.isMultiSelect = isMultiSelect;
     this.hasDynamicData = hasDynamicData;
-    this.defaultValue = defaultValue || (isMultiSelect ? [] : null);
+    this.defaultValue = defaultValue || (isMultiSelect ? [] : undefined);
     this.validators = validators;
     this.items = items;
   }
@@ -40,7 +40,7 @@ export class StaticSelectControl<T> extends SelectControl<any> {
   constructor(
     name: string,
     label: string,
-    items: ILabelValue<T>[],
+    items?: ILabelValue<T>[],
     isMultiSelect: boolean = false,
     defaultValue: SelectedValueSingle | SelectedValueMulti = null,
     validators: ValidatorFn | ValidatorFn[] | null = [],
@@ -75,14 +75,14 @@ export class DynamicSelectControl<ListItemType, ResponseType, PostBodyType = any
     label: string,
     requestData: IRequestData<ListItemType, ResponseType, PostBodyType>,
     isMultiSelect: boolean = false,
-    defaultValue: SelectedValueSingle | SelectedValueMulti = null,
+    defaultValue?: SelectedValueSingle | SelectedValueMulti,
     validators: ValidatorFn | ValidatorFn[] | null = [],
     isDependantOnAnotherControl?: string,
   ) {
     super(
       name,
       label,
-      undefined,
+      isDependantOnAnotherControl && [] || undefined,
       isMultiSelect,
       true,
       validators,
@@ -91,9 +91,5 @@ export class DynamicSelectControl<ListItemType, ResponseType, PostBodyType = any
 
     this.requestData = requestData;
     this.isDependantOnAnotherControl = isDependantOnAnotherControl;
-  }
-
-  public setItems(value: ILabelValue<ListItemType>[]): void {
-    this.items = value;
   }
 }

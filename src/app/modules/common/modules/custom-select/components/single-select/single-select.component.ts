@@ -23,15 +23,15 @@ export class SingleSelectComponent implements ControlValueAccessor {
   @Input() public labelKey = '';
   @Input() public valueKey = '';
   @Input() public placeholder = 'Select items';
-  @Input() public readonly isClearable = true;
-  @Input() public readonly useModelBindingInsteadOfIdAndValue = false;
+  @Input() public isClearable = true;
+  @Input() public useModelBindingInsteadOfIdAndValue = false;
 
-  @Input() public readonly notFoundText = 'No data';
-  @Input() public readonly hasSelectAndDeselectAllButtons = false;
-  @Input() public readonly hasSearch = false;
-  @Input() public readonly searchPlaceholder = 'Search';
-  @Input() public readonly searchFn: ((term: any, item: any) => boolean) | null = null;
-  @Input() public readonly trackByFn: (item: any) => any = (item: any) => item[this.valueKey];
+  @Input() public notFoundText = 'No data';
+  @Input() public hasSelectAndDeselectAllButtons = false;
+  @Input() public hasSearch = false;
+  @Input() public searchPlaceholder = 'Search';
+  @Input() public searchFn: ((term: any, item: any) => boolean) | null = null;
+  @Input() public trackByFn: (item: any) => any = (item: any) => item[this.valueKey];
 
   @Input()
   public set isLoading(value: boolean) {

@@ -3,5 +3,5 @@ export enum AppRoutes {
   ClientInfo = 'client-info',
   ClientAddress = 'address',
   ClientIdentity = 'identity',
-    CreatedClient = 'created-client',
+  CreatedClient = 'created-client',
 }

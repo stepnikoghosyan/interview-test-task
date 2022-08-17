@@ -49,7 +49,7 @@ export function getStepsConfig(): Array<IStepConfigItem> {
               results: 50,
             },
             dataNormalizerFn: normalizeCoordinatorResponse,
-          }
+          },
         ),
         new CheckboxControl('doNotSendSMS', 'Do not Send SMS'),
       ],
@@ -82,7 +82,7 @@ export function getStepsConfig(): Array<IStepConfigItem> {
             dataNormalizerFn: normalizeCityResponse,
           },
           true,
-          null,
+          undefined,
           [Validators.required],
           'country',
         ),
