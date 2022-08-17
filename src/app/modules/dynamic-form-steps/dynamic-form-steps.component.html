@@ -1,0 +1,81 @@
+<section class="container pb-4">
+  <div class="p-4 p-md-5">
+
+    <ng-container *ngIf="!!currentStepForm && !!currentStepConfig">
+
+      <div class="d-flex">
+        <div class="w-100">
+          <h3 class="mb-4 text-center">{{ currentStepConfig.pageTitle }}</h3>
+        </div>
+      </div>
+
+      <form [formGroup]="form">
+        <ng-container *ngFor="let control of currentStepConfig.controls">
+          <ng-container [ngSwitch]="control.controlType" [formGroupName]="currentStepConfig.route">
+
+            <!-- Text Input -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.Text" [labelFor]="control.name" [label]="control.label">
+              <input [id]="control.name" [formControlName]="control.name" type="text" class="form-control">
+            </app-form-field>
+
+            <!-- Date Input -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.Date" [labelFor]="control.name" [label]="control.label">
+              <app-date-picker [formControlName]="control.name"></app-date-picker>
+            </app-form-field>
+
+            <!-- Number Input -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.Number" [labelFor]="control.name" [label]="control.label">
+              <input [id]="control.name" [formControlName]="control.name" appOnlyNumbers type="text"
+                     class="form-control">
+            </app-form-field>
+
+            <!-- Select -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.Select" [labelFor]="control.name" [label]="control.label">
+              <app-single-select
+                *ngIf="!$any(control)['isMultiSelect']; else multiSelect"
+                [formControlName]="control.name"
+                [items]="$any(control)['items'] || []"
+                [isLoading]="!$any(control)['items']"
+                [hasSearch]="true"
+                labelKey="label"
+                valueKey="value"
+                [placeholder]="'Select ' + control.label">
+              </app-single-select>
+
+              <ng-template #multiSelect>
+                <app-multi-select
+                  [formControlName]="control.name"
+                  [items]="$any(control)['items'] || []"
+                  [isLoading]="!$any(control)['items']"
+                  [hasSearch]="true"
+                  labelKey="label"
+                  valueKey="value"
+                  [placeholder]="'Select ' + control.label">
+                </app-multi-select>
+              </ng-template>
+            </app-form-field>
+
+            <!-- Checkbox -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.Checkbox">
+              <div class="custom-control custom-checkbox">
+                <input [formControlName]="control.name" [id]="control.name" type="checkbox"
+                       class="custom-control-input">
+                <label [for]="control.name" class="custom-control-label hover-pointer">{{ control.label }}</label>
+              </div>
+            </app-form-field>
+
+            <!-- File -->
+            <app-form-field *ngSwitchCase="CONTROL_TYPES.File" [labelFor]="control.name" [label]="control.label">
+              <app-file-input [formControlName]="control.name"></app-file-input>
+            </app-form-field>
+
+          </ng-container>
+        </ng-container>
+      </form>
+
+    </ng-container>
+  </div>
+
+  <app-navigation-buttons (onNavigation)="handleNavigation($event)">
+  </app-navigation-buttons>
+</section>

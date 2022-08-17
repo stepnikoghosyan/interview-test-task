@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-export function imageMimeTypeValidator(allowedTypes?: string[]): ValidationErrors | null {
+export function imageMimeTypeValidator(allowedTypes?: string[]): (control: AbstractControl) => ValidationErrors | null {
   const types = allowedTypes || ['*'];
 
   return (control: AbstractControl): ValidationErrors | null => {

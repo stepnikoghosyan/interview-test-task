@@ -31,7 +31,7 @@ const routes: Routes = [
         component: ClientAddressComponent,
         canActivate: [
           StepGuard,
-        ]
+        ],
       },
       {
         path: AppRoutes.ClientIdentity,

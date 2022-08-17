@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-export function fileSizeValidator(sizeInBytes?: number): ValidationErrors | null {
+export function fileSizeValidator(sizeInBytes?: number): (control: AbstractControl) => ValidationErrors | null {
   const maxFileSize = sizeInBytes || 2 * 1024 * 1024; // 2 MB
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control) {
