@@ -4,6 +4,8 @@ import { ILabelValue } from '../../common/models/label-value.model';
 import { DocumentType } from './enums/document-type.model';
 
 export interface IUserData {
+  id: number;
+
   basicInfo: {
     lastName: string;
     name: string;

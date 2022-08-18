@@ -110,8 +110,4 @@ export class FormsService {
       this.router.navigate([getFullRoute(this.stepsConfig[currentStepIndex - 1].route)]);
     }
   }
-
-  public cleanUp(): void {
-    this.currentStepData$.next(undefined);
-  }
 }

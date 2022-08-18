@@ -1,25 +1,23 @@
 import { Component } from '@angular/core';
 
 // services
-import { FormsService } from '../../services/forms.service';
+import { FormsService } from '../../../client-form/services/forms.service';
 
 // models
-import { IUserData } from '../../models/user-data.model';
+import { IUserData } from '../../../client-form/models/user-data.model';
 import { ILabelValue } from '../../../common/models/label-value.model';
-import { ProfileTabs } from '../../models/enums/profile-tabs.model';
-import { ClientGroup, getClientGroupDisplayValues } from '../../models/enums/client-group.model';
+import { ProfileTabs } from '../../../client-form/models/enums/profile-tabs.model';
+import { ClientGroup, getClientGroupDisplayValues } from '../../../client-form/models/enums/client-group.model';
 import { getGenderDisplayValues } from '../../../common/models/enums/gender.model';
-import { getDocumentTypeDisplayValues } from '../../models/enums/document-type.model';
+import { getDocumentTypeDisplayValues } from '../../../client-form/models/enums/document-type.model';
 
 // configs
-import { getProfileTabsConfig } from '../../../profile/configs/profile-tabs.config';
+import { getProfileTabsConfig } from '../../configs/profile-tabs.config';
 
 @Component({
-  selector: 'app-created-client',
-  templateUrl: './created-client.component.html',
-  styleUrls: ['./created-client.component.scss']
+  templateUrl: './profile.component.html',
 })
-export class CreatedClientComponent {
+export class ProfileComponent {
   public userData: IUserData;
 
   public activeTab: ILabelValue<ProfileTabs>;

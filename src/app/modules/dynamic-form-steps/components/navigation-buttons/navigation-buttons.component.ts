@@ -26,7 +26,6 @@ export class NavigationButtonsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.isFirstStep = this.formsService.isFirstStep();
-          console.log(this.isFirstStep);
           this.isLastStep = this.formsService.isLastStep();
         },
       });

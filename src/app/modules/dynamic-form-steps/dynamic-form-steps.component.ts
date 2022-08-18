@@ -16,6 +16,7 @@ import { Steps } from './models/steps.model';
 @Component({
   selector: 'app-dynamic-form-steps',
   templateUrl: './dynamic-form-steps.component.html',
+  providers: [FormsService],
 })
 export class DynamicFormStepsComponent implements OnInit, OnDestroy {
   public form: FormGroup;

@@ -10,19 +10,14 @@ import { CustomSelectModule } from '../common/modules/custom-select/custom-selec
 import { FileInputModule } from '../common/modules/file-input/file-input.module';
 import { OnlyNumbersInputModule } from '../common/modules/only-numbers-input/only-numbers-input.module';
 
-// services
-import { FormsService } from './services/forms.service';
-
 // components
 import { DynamicFormStepsComponent } from './dynamic-form-steps.component';
 import { NavigationButtonsComponent } from './components/navigation-buttons/navigation-buttons.component';
-import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
     DynamicFormStepsComponent,
     NavigationButtonsComponent,
-    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -33,9 +28,6 @@ import { ProfileComponent } from './components/profile/profile.component';
     CustomSelectModule,
     OnlyNumbersInputModule,
     FileInputModule,
-  ],
-  providers: [
-    FormsService,
   ],
 })
 export class DynamicFormStepsModule {
