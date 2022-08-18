@@ -5,12 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './models/enums/app-routes.model';
 
 const routes: Routes = [
+  // {
+  //   path: AppRoutes.ClientForm,
+  //   loadChildren: () => import('./modules/client-form/client-form.module').then(m => m.ClientFormModule),
+  // },
   {
     path: AppRoutes.ClientForm,
-    loadChildren: () => import('./modules/client-form/client-form.module').then(m => m.ClientFormModule),
-  },
-  {
-    path: 'test',
     loadChildren: () => import('./modules/dynamic-form-steps/dynamic-form-steps.module').then(m => m.DynamicFormStepsModule),
   },
   {
