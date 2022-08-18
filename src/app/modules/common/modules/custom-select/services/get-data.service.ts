@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { IRequestData } from '../models/controls/select-control.model';
-import { ILabelValue } from '../../common/models/label-value.model';
 import { HttpClient } from '@angular/common/http';
-import { anyToHttpParams } from '../../common/utils/any-to-http.params';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+// models
+import { IRequestData } from '../../../../dynamic-form-steps/models/controls/select-control.model';
+import { ILabelValue } from '../../../models/label-value.model';
+
+// helpers
+import { anyToHttpParams } from '../../../utils/any-to-http.params';
+
+@Injectable()
 export class GetDataService {
   constructor(
     private httpClient: HttpClient,

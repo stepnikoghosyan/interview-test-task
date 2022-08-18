@@ -11,8 +11,8 @@ import { FileControl } from '../models/controls/file-control.model';
 import { DynamicSelectControl, StaticSelectControl } from '../models/controls/select-control.model';
 import { SelectedValueSingle } from '../../common/modules/custom-select/models/selected-value-single.model';
 import { Gender, getGenderDisplayValues } from '../../common/models/enums/gender.model';
-import { getClientGroupDisplayValues } from '../../client-form/models/enums/client-group.model';
-import { getDocumentTypeDisplayValues } from '../../client-form/models/enums/document-type.model';
+import { getClientGroupDisplayValues } from '../../common/models/enums/client-group.model';
+import { getDocumentTypeDisplayValues } from '../../common/models/enums/document-type.model';
 
 // validators
 import { notOnlySpacesValidator } from '../../common/validators/not-only-spaces.validator';

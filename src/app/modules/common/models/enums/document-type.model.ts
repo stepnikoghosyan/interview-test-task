@@ -1,4 +1,4 @@
-import { DisplayValues } from '../../../common/models/display-values.model';
+import { DisplayValues } from '../display-values.model';
 
 export enum DocumentType {
   Passport = 'Passport',

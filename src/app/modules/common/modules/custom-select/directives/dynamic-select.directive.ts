@@ -3,7 +3,7 @@ import { Subject, of } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 // services
-import { GetDataService } from '../../../../dynamic-form-steps/services/get-data.service';
+import { GetDataService } from '../services/get-data.service';
 import { FormsService } from '../../../../dynamic-form-steps/services/forms.service';
 
 // models

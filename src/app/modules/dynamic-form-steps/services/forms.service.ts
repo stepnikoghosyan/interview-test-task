@@ -4,13 +4,10 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// services
-import { GetDataService } from './get-data.service';
-
 // models
+import { IUserData } from '../../common/models/user-data.model';
 import { Steps } from '../models/steps.model';
 import { ICurrentStepData } from '../models/current-step-data.model';
-import { IUserData } from '../../client-form/models/user-data.model';
 import { AppRoutes } from '../../../models/enums/app-routes.model';
 
 // configs
@@ -29,7 +26,6 @@ export class FormsService {
   private readonly stepsConfig = getStepsConfig();
 
   constructor(
-    private readonly getDataService: GetDataService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
   ) {

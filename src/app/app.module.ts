@@ -9,10 +9,11 @@ import { faCalendar, faSearch, faBan } from '@fortawesome/free-solid-svg-icons';
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
+import { NotificationsModule } from './modules/common/modules/notifications/notifications.module';
+import { CustomSelectModule } from './modules/common/modules/custom-select/custom-select.module';
 
 // components
 import { AppComponent } from './app.component';
-import { NotificationsModule } from './modules/common/modules/notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NotificationsModule } from './modules/common/modules/notifications/noti
       extendedTimeOut: 1000,
       tapToDismiss: true,
     }),
+    CustomSelectModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

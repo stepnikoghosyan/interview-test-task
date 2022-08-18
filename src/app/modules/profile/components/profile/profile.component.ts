@@ -8,14 +8,14 @@ import { UsersService } from '../../../common/services/users.service';
 import { NotificationsService } from '../../../common/modules/notifications/services/notifications.service';
 
 // models
-import { IUserData } from '../../../client-form/models/user-data.model';
+import { IUserData } from '../../../common/models/user-data.model';
 import { ILabelValue } from '../../../common/models/label-value.model';
-import { ProfileTabs } from '../../../client-form/models/enums/profile-tabs.model';
-import { ClientGroup, getClientGroupDisplayValues } from '../../../client-form/models/enums/client-group.model';
+import { ProfileTabs } from '../../../common/models/enums/profile-tabs.model';
+import { ClientGroup, getClientGroupDisplayValues } from '../../../common/models/enums/client-group.model';
 import { AppRoutes } from '../../../../models/enums/app-routes.model';
 import { NotificationTypes } from '../../../common/modules/notifications/models/notification-types.model';
 import { getGenderDisplayValues } from '../../../common/models/enums/gender.model';
-import { getDocumentTypeDisplayValues } from '../../../client-form/models/enums/document-type.model';
+import { getDocumentTypeDisplayValues } from '../../../common/models/enums/document-type.model';
 
 // configs
 import { getProfileTabsConfig } from '../../configs/profile-tabs.config';

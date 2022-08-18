@@ -7,7 +7,6 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 // services
 import { FormsService } from './services/forms.service';
 import { UsersService } from '../common/services/users.service';
-import { GetDataService } from './services/get-data.service';
 import { NotificationsService } from '../common/modules/notifications/services/notifications.service';
 
 // models
@@ -39,7 +38,6 @@ export class DynamicFormStepsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly usersService: UsersService,
     private readonly formsService: FormsService,
-    private readonly getDataService: GetDataService,
     private readonly notificationsService: NotificationsService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,

@@ -1,5 +1,5 @@
 import { ILabelValue } from '../../common/models/label-value.model';
-import { ProfileTabs } from '../../client-form/models/enums/profile-tabs.model';
+import { ProfileTabs } from '../../common/models/enums/profile-tabs.model';
 
 export function getProfileTabsConfig(): ILabelValue<ProfileTabs>[] {
   return [

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
 
 // models
-import { IUserData } from '../../client-form/models/user-data.model';
+import { IUserData } from '../models/user-data.model';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService extends BaseHttpService<IUserData> {

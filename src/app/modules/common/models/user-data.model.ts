@@ -1,6 +1,6 @@
-import { Gender } from '../../common/models/enums/gender.model';
+import { Gender } from './enums/gender.model';
 import { ClientGroup } from './enums/client-group.model';
-import { ILabelValue } from '../../common/models/label-value.model';
+import { ILabelValue } from './label-value.model';
 import { DocumentType } from './enums/document-type.model';
 
 export interface IUserData {
