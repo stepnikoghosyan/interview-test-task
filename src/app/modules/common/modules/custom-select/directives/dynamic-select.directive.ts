@@ -1,14 +1,18 @@
 import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, of } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+
+// services
+import { GetDataService } from '../../../../dynamic-form-steps/services/get-data.service';
+import { FormsService } from '../../../../dynamic-form-steps/services/forms.service';
+
+// models
 import {
   DynamicSelectControl,
   SelectControl,
 } from '../../../../dynamic-form-steps/models/controls/select-control.model';
-import { switchMap, takeUntil } from 'rxjs/operators';
 import { SelectedValueSingle } from '../models/selected-value-single.model';
 import { SelectedValueMulti } from '../models/selected-value-multi.model';
-import { of, Subject } from 'rxjs';
-import { GetDataService } from '../../../../dynamic-form-steps/services/get-data.service';
-import { FormsService } from '../../../../dynamic-form-steps/services/forms.service';
 
 @Directive({
   selector: '[appDynamicSelect]',
@@ -34,6 +38,10 @@ export class DynamicSelectDirective implements OnInit, OnDestroy {
     if (control.isDependantOnAnotherControl) {
       this.subscribeToSourceControlValueChanges();
     } else {
+      if (control.items && control.items.length) {
+        return;
+      }
+
       control.items = undefined;
 
       this.getDataService.getData(control.requestData)

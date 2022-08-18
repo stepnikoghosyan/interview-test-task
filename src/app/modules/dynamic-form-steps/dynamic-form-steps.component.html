@@ -68,6 +68,7 @@
             </app-form-field>
 
             <!-- File -->
+            <!-- TODO: fix file input (no preview image, validators not working) -->
             <app-form-field *ngSwitchCase="CONTROL_TYPES.File" [labelFor]="control.name" [label]="control.label">
               <app-file-input [formControlName]="control.name"></app-file-input>
             </app-form-field>

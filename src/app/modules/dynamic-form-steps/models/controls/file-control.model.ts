@@ -5,7 +5,7 @@ import { IControlBase } from './control-base.model';
 import { ControlTypes } from '../control-types.model';
 
 export class FileControl implements IControlBase<File | null> {
-  controlType = ControlTypes.Date;
+  controlType = ControlTypes.File;
 
   constructor(
     public name: string,

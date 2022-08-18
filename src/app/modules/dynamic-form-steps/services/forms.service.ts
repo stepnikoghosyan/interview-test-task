@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { getStepsConfig } from '../configs/steps.config';
-import { GetDataService } from './get-data.service';
-import { Steps } from '../models/steps.model';
-import { getFullRoute } from '../../common/utils/get-full-route.helper';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+
+// services
+import { GetDataService } from './get-data.service';
+
+// models
+import { Steps } from '../models/steps.model';
 import { ICurrentStepData } from '../models/current-step-data.model';
-import { DynamicSelectControl } from '../models/controls/select-control.model';
-import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { SelectedValueSingle } from '../../common/modules/custom-select/models/selected-value-single.model';
-import { SelectedValueMulti } from '../../common/modules/custom-select/models/selected-value-multi.model';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { ILabelValue } from '../../common/models/label-value.model';
+
+// configs
+import { getStepsConfig } from '../configs/steps.config';
+
+// helpers
+import { getFullRoute } from '../../common/utils/get-full-route.helper';
 
 @Injectable()
 export class FormsService {
@@ -62,12 +65,24 @@ export class FormsService {
     this.router.navigate([getFullRoute(this.stepsConfig[0].route)]);
   }
 
-    private isFirstStep(step: Steps): boolean {
-    return this.stepsConfig[0].route === step;
+  public isFirstStep(step?: Steps): boolean {
+    // tslint:disable-next-line:variable-name
+    const _step = step || this.currentStepData$.value?.config.route;
+    if (!_step) {
+      return false;
+    }
+
+    return this.stepsConfig[0].route === _step;
   }
 
-  private isLastStep(step: Steps): boolean {
-    return this.stepsConfig[this.stepsConfig.length - 1].route === step;
+  public isLastStep(step?: Steps): boolean {
+    // tslint:disable-next-line:variable-name
+    const _step = step || this.currentStepData$.value?.config.route;
+    if (!_step) {
+      return false;
+    }
+
+    return this.stepsConfig[this.stepsConfig.length - 1].route === _step;
   }
 
   public goToNextStep(): void {

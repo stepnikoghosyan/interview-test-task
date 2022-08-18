@@ -1,30 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { of, Subject } from 'rxjs';
-import { ControlTypes } from './models/control-types.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// services
 import { FormsService } from './services/forms.service';
+import { GetDataService } from './services/get-data.service';
+
+// models
+import { ControlTypes } from './models/control-types.model';
 import { ICurrentStepData } from './models/current-step-data.model';
 import { Steps } from './models/steps.model';
-import { GetDataService } from './services/get-data.service';
 
 @Component({
   selector: 'app-dynamic-form-steps',
   templateUrl: './dynamic-form-steps.component.html',
 })
 export class DynamicFormStepsComponent implements OnInit, OnDestroy {
-  // Approach 1
-  // 1. Get all data from API
-
-  // Approach 2
-  // 1. Have all configs in Client side
-  // 2. Request data for Select inputs in component, after specific step is loaded
-  // 3. Each select config has an endpoint for request and a function for converting data from response to ILabelValue
-
-  // Approach 3
-  // 1. get select data when requested
-
   public form: FormGroup;
 
   public currentStepData?: ICurrentStepData;
@@ -71,9 +64,7 @@ export class DynamicFormStepsComponent implements OnInit, OnDestroy {
   public handleNavigation(event: 'next' | 'prev'): void {
     if (event === 'next') {
       this.handleNextClick();
-    }
-
-    if (event === 'prev') {
+    } else {
       this.handlePrevClick();
     }
   }
