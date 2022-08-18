@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // services
 import { GetDataService } from './get-data.service';
@@ -17,6 +18,7 @@ import { getStepsConfig } from '../configs/steps.config';
 
 // helpers
 import { getFullRoute } from '../../common/utils/get-full-route.helper';
+import { getBase64FromFile } from '../utils/file-to-base64.helper';
 
 @Injectable()
 export class FormsService {
@@ -88,8 +90,6 @@ export class FormsService {
   }
 
   public goToNextStep(): void {
-    // TODO: implement final step next click
-
     if (this.currentStepData$.value?.form.invalid) {
       this.currentStepData$.value.form.markAllAsTouched();
       return;
@@ -106,14 +106,14 @@ export class FormsService {
     }
   }
 
-  public get formValueToPayload(): Omit<IUserData, 'id'> {
+  public get formValueToPayload(): Observable<Omit<IUserData, 'id'>> {
     // TODO: convert to config (not doing right now, for taking less time)
 
     const basicInfoValues = this.form.value[AppRoutes.ClientInfo];
-    const addressValues =  this.form.value[AppRoutes.ClientAddress];
-    const identityValues =  this.form.value[AppRoutes.ClientIdentity];
+    const addressValues = this.form.value[AppRoutes.ClientAddress];
+    const identityValues = this.form.value[AppRoutes.ClientIdentity];
 
-    return {
+    const data = {
       basicInfo: {
         lastName: basicInfoValues.lastName,
         name: basicInfoValues.name,
@@ -142,6 +142,23 @@ export class FormsService {
         file: identityValues.file,
       },
     };
+
+    if (!(identityValues.file instanceof File)) {
+      return of(data);
+    }
+
+    return getBase64FromFile(identityValues.file)
+      .pipe(
+        map((result) => {
+          return {
+            ...data,
+            identity: {
+              ...data.identity,
+              file: result,
+            },
+          };
+        }),
+      );
   }
 
   public goToPrevStep(): void {

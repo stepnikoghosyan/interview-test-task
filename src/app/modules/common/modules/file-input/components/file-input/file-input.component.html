@@ -12,4 +12,9 @@
   </div>
 </div>
 
-<app-file-preview *ngIf="previewImage" (clearFileInput)="clearFileInput()"></app-file-preview>
+<app-file-preview *ngIf="previewImage && value" [imageSrc]="value">
+  <button (click)="handleClearFileInput()" type="button"
+          class="btn btn-danger btn-sm ms-3 ml-4">
+    <fa-icon icon="ban" size="2x"></fa-icon>
+  </button>
+</app-file-preview>

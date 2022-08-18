@@ -25,7 +25,7 @@ export class FileInputComponent implements ControlValueAccessor {
     }
   }
 
-  public clearFileInput(): void {
+  public handleClearFileInput(): void {
     this.writeValue(null);
   }
 

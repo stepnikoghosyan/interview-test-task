@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 // services
 import { FormsService } from './services/forms.service';
@@ -108,8 +108,11 @@ export class DynamicFormStepsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.form.disable();
 
-    this.usersService.createUser(this.formsService.formValueToPayload)
-      .pipe(takeUntil(this.subscriptions$))
+    this.formsService.formValueToPayload
+      .pipe(
+        switchMap((payload) => this.usersService.createUser(payload)),
+        takeUntil(this.subscriptions$),
+      )
       .subscribe({
         next: (response) => this.handleSuccess(response.id),
         error: () => this.handleError(),
