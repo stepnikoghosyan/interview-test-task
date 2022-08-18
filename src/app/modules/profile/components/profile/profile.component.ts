@@ -14,6 +14,8 @@ import { ProfileTabs } from '../../../client-form/models/enums/profile-tabs.mode
 import { ClientGroup, getClientGroupDisplayValues } from '../../../client-form/models/enums/client-group.model';
 import { AppRoutes } from '../../../../models/enums/app-routes.model';
 import { NotificationTypes } from '../../../common/modules/notifications/models/notification-types.model';
+import { getGenderDisplayValues } from '../../../common/models/enums/gender.model';
+import { getDocumentTypeDisplayValues } from '../../../client-form/models/enums/document-type.model';
 
 // configs
 import { getProfileTabsConfig } from '../../configs/profile-tabs.config';
@@ -32,6 +34,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public readonly tabsConfig = getProfileTabsConfig();
 
   public readonly PROFILE_TABS = ProfileTabs;
+  public readonly genderDisplayValues = getGenderDisplayValues().mapping;
+  public readonly documentTypeDisplayValues = getDocumentTypeDisplayValues().mapping;
 
   private readonly subscriptions$ = new Subject<void>();
 
@@ -60,6 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.subscriptions$))
       .subscribe({
         next: (response) => {
+          console.log(response);
           this.userData = response;
           this.isLoading = false;
         },

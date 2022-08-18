@@ -39,6 +39,7 @@
                 [items]="$any(control)['items'] || []"
                 [isLoading]="!$any(control)['items']"
                 [hasSearch]="true"
+                [useModelBindingInsteadOfIdAndValue]="$any(control)['useModelBindingInsteadOfIdAndValue']"
                 labelKey="label"
                 valueKey="value"
                 [placeholder]="'Select ' + control.label">

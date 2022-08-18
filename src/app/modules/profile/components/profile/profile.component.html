@@ -54,7 +54,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.gender || '-' }}</p>
+                <p>{{ genderDisplayValues[userData.basicInfo.gender] || '-' }}</p>
               </div>
             </div>
 
@@ -76,7 +76,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.coordinator || '-' }}</p>
+                <p>{{ userData.basicInfo.coordinator?.label || '-' }}</p>
               </div>
             </div>
 
@@ -176,7 +176,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.identity.documentType }}</p>
+                <p>{{ documentTypeDisplayValues[userData.identity.documentType] }}</p>
               </div>
             </div>
 

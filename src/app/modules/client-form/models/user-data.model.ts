@@ -14,7 +14,7 @@ export interface IUserData {
     phoneNumber: string;
     gender?: Gender;
     clientGroup: ClientGroup[];
-    coordinator: ILabelValue<number>[];
+    coordinator: ILabelValue<number>;
     doNotSendSMS: boolean;
   };
 

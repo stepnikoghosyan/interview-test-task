@@ -69,6 +69,7 @@ export interface IRequestData<ListItemType, ResponseType, PostBodyType = any> {
 export class DynamicSelectControl<ListItemType, ResponseType, PostBodyType = any> extends SelectControl<ListItemType> {
   requestData: IRequestData<ListItemType, ResponseType, PostBodyType>;
   isDependantOnAnotherControl?: string | undefined; // string -> control name, null means no
+  useModelBindingInsteadOfIdAndValue?: boolean;
 
   constructor(
     name: string,
@@ -78,6 +79,7 @@ export class DynamicSelectControl<ListItemType, ResponseType, PostBodyType = any
     defaultValue?: SelectedValueSingle | SelectedValueMulti,
     validators: ValidatorFn | ValidatorFn[] | null = [],
     isDependantOnAnotherControl?: string,
+    useModelBindingInsteadOfIdAndValue?: boolean,
   ) {
     super(
       name,
@@ -91,5 +93,6 @@ export class DynamicSelectControl<ListItemType, ResponseType, PostBodyType = any
 
     this.requestData = requestData;
     this.isDependantOnAnotherControl = isDependantOnAnotherControl;
+    this.useModelBindingInsteadOfIdAndValue = useModelBindingInsteadOfIdAndValue;
   }
 }
