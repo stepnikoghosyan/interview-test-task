@@ -1,5 +1,5 @@
 <section class="container pb-4">
-  <div class="p-4 p-md-5">
+  <div class="p-4 p-md-5 position-relative">
 
     <ng-container *ngIf="!!currentStepData">
 
@@ -78,6 +78,8 @@
       </form>
 
     </ng-container>
+
+    <app-spinner *ngIf="isLoading"></app-spinner>
   </div>
 
   <app-navigation-buttons (onNavigation)="handleNavigation($event)">

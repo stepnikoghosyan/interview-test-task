@@ -1,17 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // services
 import { FormsService } from './services/forms.service';
+import { UsersService } from '../common/services/users.service';
 import { GetDataService } from './services/get-data.service';
+import { NotificationsService } from '../common/modules/notifications/services/notifications.service';
 
 // models
 import { ControlTypes } from './models/control-types.model';
 import { ICurrentStepData } from './models/current-step-data.model';
 import { Steps } from './models/steps.model';
+import { NotificationTypes } from '../common/modules/notifications/models/notification-types.model';
+import { AppRoutes } from '../../models/enums/app-routes.model';
+
+// helpers
+import { getFullRoute } from '../common/utils/get-full-route.helper';
 
 @Component({
   selector: 'app-dynamic-form-steps',
@@ -23,14 +30,19 @@ export class DynamicFormStepsComponent implements OnInit, OnDestroy {
 
   public currentStepData?: ICurrentStepData;
 
+  public isLoading = false;
+
   public readonly CONTROL_TYPES = ControlTypes;
 
   private readonly subscriptions$ = new Subject<void>();
 
   constructor(
+    private readonly usersService: UsersService,
     private readonly formsService: FormsService,
     private readonly getDataService: GetDataService,
+    private readonly notificationsService: NotificationsService,
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
   ) {
     this.form = formsService.form;
   }
@@ -71,11 +83,58 @@ export class DynamicFormStepsComponent implements OnInit, OnDestroy {
   }
 
   private handleNextClick(): void {
-    this.formsService.goToNextStep();
+    if (this.formsService.isLastStep()) {
+      this.handleSubmit();
+    } else {
+      this.formsService.goToNextStep();
+    }
   }
 
   private handlePrevClick(): void {
     this.formsService.goToPrevStep();
+  }
+
+  private handleSubmit(): void {
+    if (this.isLoading) {
+      return;
+    }
+
+    this.form.markAllAsTouched();
+
+    if (!this.form.valid) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.form.disable();
+
+    this.usersService.createUser(this.formsService.formValueToPayload)
+      .pipe(takeUntil(this.subscriptions$))
+      .subscribe({
+        next: (response) => this.handleSuccess(response.id),
+        error: () => this.handleError(),
+      });
+  }
+
+  private handleSuccess(id: number): void {
+    this.notificationsService.showNotification({
+      title: 'Success',
+      message: 'Profile Created',
+      type: NotificationTypes.SUCCESS,
+    });
+
+    this.router.navigate([getFullRoute(AppRoutes.CreatedClient), id]);
+  }
+
+  private handleError(): void {
+    this.notificationsService.showNotification({
+      title: 'Failure',
+      message: 'Could not create user',
+      type: NotificationTypes.ERROR,
+    });
+
+    this.isLoading = false;
+    this.form.enable();
   }
 
   ngOnDestroy(): void {

@@ -4,6 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { IStepConfigItem } from './step-config-item.model';
 
 export interface ICurrentStepData {
-  form: FormGroup,
-  config: IStepConfigItem
+  form: FormGroup;
+  config: IStepConfigItem;
 }

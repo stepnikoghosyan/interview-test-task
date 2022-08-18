@@ -12,7 +12,7 @@ export interface IUserData {
     middleName: string;
     dateOfBirth: Date;
     phoneNumber: string;
-    gender: Gender;
+    gender?: Gender;
     clientGroup: ClientGroup[];
     coordinator: ILabelValue<number>[];
     doNotSendSMS: boolean;

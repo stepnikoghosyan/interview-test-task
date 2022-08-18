@@ -6,7 +6,6 @@ import { delay, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 // helpers
-import { anyToHttpParams } from '../utils/any-to-http.params';
 
 export abstract class BaseHttpService<T = any> {
 
@@ -17,12 +16,12 @@ export abstract class BaseHttpService<T = any> {
   ) {
   }
 
-  protected getById<T>(url: string, id: number): Observable<T | undefined> {
+  protected getById<T>(url: string, id: number): Observable<T> {
     // return this.http.get<T>(`${ this.BASE_API_ENDPOINT }/${ url }/${ id }/`, {
     //   headers,
     // });
 
-    return of()
+    return of(null)
       .pipe(
         delay(1500),
         map(() => {
@@ -42,7 +41,7 @@ export abstract class BaseHttpService<T = any> {
     //   params: anyToHttpParams(params),
     // });
 
-    return of()
+    return of(null)
       .pipe(
         delay(1500),
         map(() => {
@@ -54,7 +53,7 @@ export abstract class BaseHttpService<T = any> {
   protected post<PayloadType, ResponseType>(url: string, body: PayloadType | T): Observable<ResponseType> {
     // return this.http.post<ResponseType>(`${ this.BASE_API_ENDPOINT }/${ url }/`, body);
 
-    return of()
+    return of(null)
       .pipe(
         delay(1500),
         map(() => {
@@ -71,7 +70,7 @@ export abstract class BaseHttpService<T = any> {
   protected put<PayloadType, ResponseType = T>(url: string, id: number, body: PayloadType | T): Observable<ResponseType> {
     // return this.http.put<ResponseType>(`${ this.BASE_API_ENDPOINT }/${ url }/`, body);
 
-    return of()
+    return of(null)
       .pipe(
         delay(1500),
         map(() => {
@@ -89,11 +88,11 @@ export abstract class BaseHttpService<T = any> {
   protected deleteById<T = void>(url: string, id: number): Observable<void> {
     // return this.http.delete<T>(`${ this.BASE_API_ENDPOINT }/${ url }/${ id }/`);
 
-    return of()
+    return of(null)
       .pipe(
         delay(1500),
         map(() => {
-          const result = this.delete<T>(url, id);
+          const result = this.delete(url, id);
 
           if (!result) {
             throw new Error('Not Found');
@@ -105,7 +104,6 @@ export abstract class BaseHttpService<T = any> {
   protected downloadFile(url: string, fileName: string, actionType: 'download' | 'openInNewTab' = 'download'): Observable<void> {
     return this.http.get(`${ this.BASE_API_ENDPOINT }/${ url }/`, {
       responseType: 'blob',
-      params: anyToHttpParams(queryParams),
     })
       .pipe(map(response => {
         const file = new Blob([response], { type: response.type });
@@ -140,12 +138,9 @@ export abstract class BaseHttpService<T = any> {
 
   private create<ResponseType>(key: string, payload: any): ResponseType | undefined {
     const data = this.getData<ResponseType>(key);
-    if (!data) {
-      throw new Error('Failure');
-    }
 
     const newItem: ResponseType = {
-      id: (data[data.length - 1] as any).id + 1,
+      id: !data.length && 1 || ((data[data.length - 1] as any).id + 1),
       ...payload,
     };
 
@@ -158,7 +153,7 @@ export abstract class BaseHttpService<T = any> {
 
   private update<ResponseType>(key: string, id: number, payload: any): ResponseType | undefined {
     const data = this.getData<ResponseType>(key);
-    if (!data) {
+    if (!data || !data.length) {
       return;
     }
 
@@ -179,8 +174,8 @@ export abstract class BaseHttpService<T = any> {
 
   private delete(key: string, id: number): boolean {
     const data = this.getData<any>(key);
-    if (!data) {
-      return false;
+    if (!data || !data.length) {
+      return true;
     }
 
     const index = data.findIndex(item => item.id === id);

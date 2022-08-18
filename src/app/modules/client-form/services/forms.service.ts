@@ -217,7 +217,7 @@ export class FormsService {
     this.router.navigate([getFullRoute(AppRoutes.CreatedClient)]);
   }
 
-  public get formValues(): IUserData {
+  public get formValues(): Omit<IUserData, 'id'> {
     return {
       basicInfo: this.clientInfoForm.value,
       address: this.clientAddressForm.value,

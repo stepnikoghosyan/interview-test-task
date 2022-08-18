@@ -18,6 +18,10 @@ export class UsersService extends BaseHttpService<IUserData> {
     super(httpClient);
   }
 
+  public getUserById(id: number): Observable<IUserData> {
+    return this.getById(this.URL, id);
+  }
+
   public getUsers(): Observable<IUserData[]> {
     return this.getList<IUserData>(this.URL);
   }

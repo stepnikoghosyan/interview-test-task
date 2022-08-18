@@ -13,6 +13,7 @@ import { OnlyNumbersInputModule } from '../common/modules/only-numbers-input/onl
 // components
 import { DynamicFormStepsComponent } from './dynamic-form-steps.component';
 import { NavigationButtonsComponent } from './components/navigation-buttons/navigation-buttons.component';
+import { LoadersModule } from '../common/modules/loaders/loaders.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NavigationButtonsComponent } from './components/navigation-buttons/navi
     CustomSelectModule,
     OnlyNumbersInputModule,
     FileInputModule,
+    LoadersModule,
   ],
 })
 export class DynamicFormStepsModule {

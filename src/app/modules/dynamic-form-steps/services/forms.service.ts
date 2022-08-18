@@ -9,6 +9,8 @@ import { GetDataService } from './get-data.service';
 // models
 import { Steps } from '../models/steps.model';
 import { ICurrentStepData } from '../models/current-step-data.model';
+import { IUserData } from '../../client-form/models/user-data.model';
+import { AppRoutes } from '../../../models/enums/app-routes.model';
 
 // configs
 import { getStepsConfig } from '../configs/steps.config';
@@ -102,6 +104,44 @@ export class FormsService {
     if (currentStepIndex < this.stepsConfig.length - 1) {
       this.router.navigate([getFullRoute(this.stepsConfig[currentStepIndex + 1].route)]);
     }
+  }
+
+  public get formValueToPayload(): Omit<IUserData, 'id'> {
+    // TODO: convert to config (not doing right now, for taking less time)
+
+    const basicInfoValues = this.form.value[AppRoutes.ClientInfo];
+    const addressValues =  this.form.value[AppRoutes.ClientAddress];
+    const identityValues =  this.form.value[AppRoutes.ClientIdentity];
+
+    return {
+      basicInfo: {
+        lastName: basicInfoValues.lastName,
+        name: basicInfoValues.name,
+        middleName: basicInfoValues.middleName,
+        dateOfBirth: basicInfoValues.dateOfBirth,
+        phoneNumber: basicInfoValues.phoneNumber,
+        gender: basicInfoValues.gender || null,
+        clientGroup: basicInfoValues.clientGroup,
+        coordinator: basicInfoValues.coordinator,
+        doNotSendSMS: !!basicInfoValues.doNotSendSMS,
+      },
+      address: {
+        index: addressValues.index,
+        country: addressValues.country,
+        area: addressValues.area,
+        city: addressValues.city,
+        street: addressValues.street,
+        house: addressValues.house,
+      },
+      identity: {
+        documentType: identityValues.documentType,
+        series: identityValues.series,
+        number: identityValues.number,
+        issuedBy: identityValues.issuedBy,
+        dateOfIssue: identityValues.dateOfIssue,
+        file: identityValues.file,
+      },
+    };
   }
 
   public goToPrevStep(): void {

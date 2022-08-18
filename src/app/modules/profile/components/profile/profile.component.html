@@ -1,5 +1,5 @@
 <div class="container emp-profile">
-  <section>
+  <section *ngIf="!isLoading && !!userData">
     <div class="row">
       <div class="col-12">
         <h2 class="text-center">
@@ -32,7 +32,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.dateOfBirth }}</p>
+                <p>{{ userData.basicInfo.dateOfBirth | date }}</p>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ genderDisplayValues[userData.basicInfo.gender] || '-' }}</p>
+                <p>{{ userData.basicInfo.gender || '-' }}</p>
               </div>
             </div>
 
@@ -76,7 +76,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.basicInfo.coordinator }}</p>
+                <p>{{ userData.basicInfo.coordinator || '-' }}</p>
               </div>
             </div>
 
@@ -148,7 +148,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.address.street }}</p>
+                <p>{{ userData.address.street || '-' }}</p>
               </div>
             </div>
 
@@ -159,7 +159,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.address.house }}</p>
+                <p>{{ userData.address.house || '-' }}</p>
               </div>
             </div>
 
@@ -176,7 +176,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ documentTypeDisplayValues[userData.identity.documentType] }}</p>
+                <p>{{ userData.identity.documentType }}</p>
               </div>
             </div>
 
@@ -220,7 +220,7 @@
               </div>
 
               <div class="col-md-6">
-                <p>{{ userData.identity.dateOfIssue }}</p>
+                <p>{{ userData.identity.dateOfIssue | date }}</p>
               </div>
             </div>
 
@@ -240,4 +240,6 @@
       </div>
     </div>
   </section>
+
+  <app-spinner *ngIf="isLoading"></app-spinner>
 </div>

@@ -10,7 +10,7 @@ import { CheckboxControl } from '../models/controls/checkbox-control.model';
 import { FileControl } from '../models/controls/file-control.model';
 import { DynamicSelectControl, StaticSelectControl } from '../models/controls/select-control.model';
 import { SelectedValueSingle } from '../../common/modules/custom-select/models/selected-value-single.model';
-import { getGenderDisplayValues } from '../../common/models/enums/gender.model';
+import { Gender, getGenderDisplayValues } from '../../common/models/enums/gender.model';
 import { getClientGroupDisplayValues } from '../../client-form/models/enums/client-group.model';
 import { getDocumentTypeDisplayValues } from '../../client-form/models/enums/document-type.model';
 

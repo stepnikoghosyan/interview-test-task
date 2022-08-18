@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 // components
 import { ProfileComponent } from './components/profile/profile.component';
+import { getFullRoute } from '../common/utils/get-full-route.helper';
+import { AppRoutes } from '../../models/enums/app-routes.model';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ProfileComponent,
+  },
+  {
+    path: '**',
+    redirectTo: getFullRoute(AppRoutes.ClientInfo),
   }
 ];
 
